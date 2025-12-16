@@ -1,12 +1,4 @@
-
-
-
-
-
-**AI TOOLS WORK IN PROGRESS**
-
-
-
+**🤖 AI MODE AVAILABLE**
 
 <p align="center">
   <img src="assets/Sketchware-Pro.png" style="width: 30%;" />
@@ -20,6 +12,19 @@
 [![Repository Size](https://img.shields.io/github/repo-size/Sketchware-Pro/Sketchware-Pro)](https://github.com/Sketchware-Pro/Sketchware-Pro)
 
 Welcome to Sketchware Pro! Here you'll find the source code of many classes in Sketchware Pro and, most importantly, the place to contribute to Sketchware Pro.
+
+## 🎯 What's New - AI Mode
+
+Sketchware Pro now includes a powerful **AI Mode** for creating Android applications using natural language! 
+
+- **ChatGPT 5.2** integration
+- **Google Gemini 2.5 Flash** support  
+- **Google Gemini 3 Pro Preview** (experimental)
+- **Coding Agent** with full project access (like Cursor)
+- Chat-based interface for code generation
+- Automatic code modification and application
+
+📖 **[Learn more about AI Features](AI_FEATURES.md)** | 🔧 **[Integration Guide](AI_MODE_IMPLEMENTATION.md)**
 
 ## Building the App
 To build the app, you must use Gradle. It's highly recommended to use Android Studio for the best experience.
@@ -36,9 +41,28 @@ To build the app, you must use Gradle. It's highly recommended to use Android St
 | `a.a.a.qq`      | Registry of built-in libraries' dependencies |
 | `a.a.a.tq`      | Responsible for the compiling dialog's quizzes |
 | `a.a.a.yq`      | Organizes Sketchware projects' file paths    |
+| `pro.sketchware.ai.*` | **NEW: AI Mode components and Coding Agent** |
 
 > [!TIP]
 > You can also check the `mod` package, which contains the majority of contributors' changes.
+> For AI Mode, check the `pro.sketchware.ai` package.
+
+## Quick Start - AI Mode
+
+1. **Configure AI Settings**
+   - Open Settings → AI Settings
+   - Add your API keys (ChatGPT, Gemini)
+
+2. **Create an AI Project**
+   - Tap the "+" button
+   - Select "AI Mode"
+   - Choose your AI model
+   - Enter project name
+
+3. **Use the AI Chat**
+   - Tap the chat bubble icon in editor
+   - Describe what you want to build
+   - AI generates and applies code
 
 ## Contributing
 
@@ -70,13 +94,21 @@ Examples:
 - `feat: Speed up compiling with new technique`
 - `fix: Fix crash during launch on certain phones`
 - `refactor: Reformat code in File.java`
+- `feat: Add AI Mode with ChatGPT and Gemini integration`
 
 > [!IMPORTANT]
 > If you want to add new features that don't require editing other packages other than `pro.sketchware`, make your changes in `pro.sketchware` package, and respect the directories and files structure and names. Also, even though the project compiles just fine with Kotlin classes that you might add, try to make your changes or additions in Java, not Kotlin unless it is more than necessary.
+>
+> **For AI Mode contributions**: Please add your changes to the `pro.sketchware.ai` package.
 
 ## Thanks for Contributing
 
 Thank you for contributing to Sketchware Pro! Your contributions help keep Sketchware Pro alive. Each accepted contribution will be noted down in the "About Team" activity. We'll use your GitHub name and profile picture initially, but they can be changed, of course.
+
+**Special Thanks to:**
+- **justinsanjp** - AI Mode Lead Developer
+- All Sketchware Pro contributors
+- Original Sketchware Team
 
 ## Discord
 
