@@ -1,62 +1,63 @@
 package pro.sketchware.ai.ui;
 
-import android.app.Activity;
 import android.app.TabActivity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-/**
- * About Team Activity with tabs for AI Label, Old Modders, and New Modders
- */
 public class AboutTeamActivity extends TabActivity {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(android.R.layout.tab_content);
-        
+
         TabHost tabHost = getTabHost();
-        
-        // AI Label Tab
-        TabSpec aiTab = tabHost.newTabSpec("ai");
-        aiTab.setLabel("AI");
-        aiTab.setContent(this::createAITabContent);
+        tabHost.setup();
+
+        TabHost.TabSpec aiTab = tabHost.newTabSpec("ai");
+        aiTab.setIndicator("AI");
+        aiTab.setContent(new TabHost.TabContentFactory() {
+            public View createTabContent(String tag) {
+                return createAITabContent();
+            }
+        });
         tabHost.addTab(aiTab);
-        
-        // Old Modders Tab
-        TabSpec oldModdersTab = tabHost.newTabSpec("old_modders");
-        oldModdersTab.setLabel("Old Modders");
-        oldModdersTab.setContent(this::createOldModdersTabContent);
+
+        TabHost.TabSpec oldModdersTab = tabHost.newTabSpec("old_modders");
+        oldModdersTab.setIndicator("Old Modders");
+        oldModdersTab.setContent(new TabHost.TabContentFactory() {
+            public View createTabContent(String tag) {
+                return createOldModdersTabContent();
+            }
+        });
         tabHost.addTab(oldModdersTab);
-        
-        // Modders Tab (New)
-        TabSpec moddersTab = tabHost.newTabSpec("modders");
-        moddersTab.setLabel("Modders");
-        moddersTab.setContent(this::createModdersTabContent);
+
+        TabHost.TabSpec moddersTab = tabHost.newTabSpec("modders");
+        moddersTab.setIndicator("Modders");
+        moddersTab.setContent(new TabHost.TabContentFactory() {
+            public View createTabContent(String tag) {
+                return createModdersTabContent();
+            }
+        });
         tabHost.addTab(moddersTab);
-        
+
         tabHost.setCurrentTab(0);
     }
-    
-    /**
-     * Create AI Tab Content
-     */
-    private int createAITabContent(String tag) {
+
+    private View createAITabContent() {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(15, 15, 15, 15);
-        
+
         TextView titleText = new TextView(this);
         titleText.setText("Sketchware Pro - AI Powered");
         titleText.setTextSize(18);
         titleText.setTypeface(null, android.graphics.Typeface.BOLD);
         titleText.setPadding(0, 0, 0, 10);
         layout.addView(titleText);
-        
+
         TextView descriptionText = new TextView(this);
         descriptionText.setText(
             "AI Mode Features:\n" +
@@ -72,32 +73,28 @@ public class AboutTeamActivity extends TabActivity {
         descriptionText.setTextSize(14);
         descriptionText.setLineSpacing(1.5f, 1.5f);
         layout.addView(descriptionText);
-        
-        setContentView(layout);
-        return layout.getId();
+
+        return layout;
     }
-    
-    /**
-     * Create Old Modders Tab Content
-     */
-    private int createOldModdersTabContent(String tag) {
+
+    private View createOldModdersTabContent() {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(15, 15, 15, 15);
-        
+
         TextView titleText = new TextView(this);
         titleText.setText("Original Sketchware Pro Modders");
         titleText.setTextSize(16);
         titleText.setTypeface(null, android.graphics.Typeface.BOLD);
         titleText.setPadding(0, 0, 0, 15);
         layout.addView(titleText);
-        
+
         String[] oldModders = {
             "Original Sketchware Team",
             "Community Contributors v1.0-v2.0",
             "Early Sketchware Pro Maintainers"
         };
-        
+
         for (String modder : oldModders) {
             TextView modderText = new TextView(this);
             modderText.setText("• " + modder);
@@ -105,32 +102,27 @@ public class AboutTeamActivity extends TabActivity {
             modderText.setPadding(0, 5, 0, 5);
             layout.addView(modderText);
         }
-        
-        setContentView(layout);
-        return layout.getId();
+
+        return layout;
     }
-    
-    /**
-     * Create Modders Tab Content (New)
-     */
-    private int createModdersTabContent(String tag) {
+
+    private View createModdersTabContent() {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(15, 15, 15, 15);
-        
+
         TextView titleText = new TextView(this);
         titleText.setText("Current Modders");
         titleText.setTextSize(16);
         titleText.setTypeface(null, android.graphics.Typeface.BOLD);
         titleText.setPadding(0, 0, 0, 15);
         layout.addView(titleText);
-        
-        // Main current modders
+
         String[] currentModders = {
             "justinsanjp - AI Integration & Project Lead",
             "Community Contributors"
         };
-        
+
         for (String modder : currentModders) {
             TextView modderText = new TextView(this);
             modderText.setText("• " + modder);
@@ -140,8 +132,7 @@ public class AboutTeamActivity extends TabActivity {
             modderText.setTextColor(0xFF1976D2);
             layout.addView(modderText);
         }
-        
-        // Contributions note
+
         TextView contributionsText = new TextView(this);
         contributionsText.setText(
             "\nThank you for contributing to Sketchware Pro!" +
@@ -151,8 +142,7 @@ public class AboutTeamActivity extends TabActivity {
         contributionsText.setPadding(0, 15, 0, 0);
         contributionsText.setLineSpacing(1.5f, 1.5f);
         layout.addView(contributionsText);
-        
-        setContentView(layout);
-        return layout.getId();
+
+        return layout;
     }
 }

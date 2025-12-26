@@ -36,15 +36,23 @@ public class ActivityIntegrationAdapter {
     public static void integratePlusButton(Activity activity, Button plusButton) {
         plusButton.setOnClickListener(v -> {
             NewProjectDialog dialog = new NewProjectDialog(activity);
-            dialog.showModeSelectionDialog((projectName, aiMode, model) -> {
-                // Callback when project is created
-                // Your existing createProject() method
-                // Call it like: activity.createProject(projectName, aiMode, model);
-                
-                // For now, show a success message
-                android.widget.Toast.makeText(activity, 
-                    "Project: " + projectName + " (" + (aiMode ? "AI" : "Standard") + ")",
-                    android.widget.Toast.LENGTH_SHORT).show();
+            dialog.showModeSelectionDialog(new NewProjectDialog.OnProjectCreatedListener() {
+                @Override
+                public void onProjectCreated(String projectName, boolean aiMode, AIConfig.AIModel model) {
+                    // Callback when project is created
+                    // Your existing createProject() method
+                    // Call it like: activity.createProject(projectName, aiMode, model);
+
+                    // For now, show a success message
+                    android.widget.Toast.makeText(activity,
+                        "Project: " + projectName + " (" + (aiMode ? "AI" : "Standard") + ")",
+                        android.widget.Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled() {
+                    // Handle cancellation if needed
+                }
             });
         });
     }

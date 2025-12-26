@@ -3,6 +3,7 @@ package pro.sketchware.ai;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
+import org.json.JSONException;
 
 /**
  * Coding Agent - AI-powered code generation and modification
@@ -21,7 +22,7 @@ public class CodingAgent {
             this.timestamp = System.currentTimeMillis();
         }
         
-        public JSONObject toJSON() {
+        public JSONObject toJSON() throws JSONException {
             JSONObject json = new JSONObject();
             json.put("role", role);
             json.put("content", content);
