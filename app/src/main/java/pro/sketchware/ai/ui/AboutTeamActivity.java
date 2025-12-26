@@ -1,10 +1,12 @@
 package pro.sketchware.ai.ui;
 
+import android.app.Activity;
 import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 /**
@@ -15,38 +17,26 @@ public class AboutTeamActivity extends TabActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(android.R.layout.tab_content);
         
         TabHost tabHost = getTabHost();
-        tabHost.setup();
         
         // AI Label Tab
-        TabHost.TabSpec aiTab = tabHost.newTabSpec("ai");
-        aiTab.setIndicator("AI");
-        aiTab.setContent(new TabHost.TabContentFactory() {
-            public View createTabContent(String tag) {
-                return createAITabContent();
-            }
-        });
+        TabSpec aiTab = tabHost.newTabSpec("ai");
+        aiTab.setLabel("AI");
+        aiTab.setContent(this::createAITabContent);
         tabHost.addTab(aiTab);
         
         // Old Modders Tab
-        TabHost.TabSpec oldModdersTab = tabHost.newTabSpec("old_modders");
-        oldModdersTab.setIndicator("Old Modders");
-        oldModdersTab.setContent(new TabHost.TabContentFactory() {
-            public View createTabContent(String tag) {
-                return createOldModdersTabContent();
-            }
-        });
+        TabSpec oldModdersTab = tabHost.newTabSpec("old_modders");
+        oldModdersTab.setLabel("Old Modders");
+        oldModdersTab.setContent(this::createOldModdersTabContent);
         tabHost.addTab(oldModdersTab);
         
         // Modders Tab (New)
-        TabHost.TabSpec moddersTab = tabHost.newTabSpec("modders");
-        moddersTab.setIndicator("Modders");
-        moddersTab.setContent(new TabHost.TabContentFactory() {
-            public View createTabContent(String tag) {
-                return createModdersTabContent();
-            }
-        });
+        TabSpec moddersTab = tabHost.newTabSpec("modders");
+        moddersTab.setLabel("Modders");
+        moddersTab.setContent(this::createModdersTabContent);
         tabHost.addTab(moddersTab);
         
         tabHost.setCurrentTab(0);
@@ -55,7 +45,7 @@ public class AboutTeamActivity extends TabActivity {
     /**
      * Create AI Tab Content
      */
-    private View createAITabContent() {
+    private int createAITabContent(String tag) {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(15, 15, 15, 15);
@@ -83,13 +73,14 @@ public class AboutTeamActivity extends TabActivity {
         descriptionText.setLineSpacing(1.5f, 1.5f);
         layout.addView(descriptionText);
         
-        return layout;
+        setContentView(layout);
+        return layout.getId();
     }
     
     /**
      * Create Old Modders Tab Content
      */
-    private View createOldModdersTabContent() {
+    private int createOldModdersTabContent(String tag) {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(15, 15, 15, 15);
@@ -115,13 +106,14 @@ public class AboutTeamActivity extends TabActivity {
             layout.addView(modderText);
         }
         
-        return layout;
+        setContentView(layout);
+        return layout.getId();
     }
     
     /**
      * Create Modders Tab Content (New)
      */
-    private View createModdersTabContent() {
+    private int createModdersTabContent(String tag) {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(15, 15, 15, 15);
@@ -160,6 +152,7 @@ public class AboutTeamActivity extends TabActivity {
         contributionsText.setLineSpacing(1.5f, 1.5f);
         layout.addView(contributionsText);
         
-        return layout;
+        setContentView(layout);
+        return layout.getId();
     }
 }
